@@ -1,21 +1,26 @@
 #!usr/bin/env python
 # encoding: utf-8
 #program do obliczania odleglosci pomiedzy dwoma punktami
-#obliczenie odleglosci z uwzględnieniem długości 1stopnia
-#na równiku jest to wartość 111km
-#dla Polski ciężko określić ale przyjmuje się 73km
+#obliczenie odleglosci z uwzglednieniem sferycznosci
 
 import sys
 import math
 
-initPoint = [10,50]
-endPoint = [30,120]
-numKmOneDegree = 73
+initPoint = [21.0122287,52.2296759]
+endPoint = [16.9251681, 52.406374]
+earthRadius = 6373.0 #km
 
-x1 = initPoint[0]
-y1 = initPoint[1]
-x2 = endPoint[0]
-y2 = initPoint[1]
 
-basicCalculation = math.sqrt((x2-x1)**2 + (y2-y1)**2) * numKmOneDegree
-print("basicCalculation = ", basicCalculation)
+lon1 = math.radians(initPoint[0])
+lat1 = math.radians(initPoint[1])
+lon2 = math.radians(endPoint[0])
+lat2 = math.radians(initPoint[1])
+
+dlon =lon2 - lon1 #dlugosc
+dlat = lat2 - lat1 #szerokość
+
+a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+baseCalc = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+destination = earthRadius * baseCalc
+
+print("destination = ", round(destination,3)," km")
