@@ -11,10 +11,7 @@ src = args.source
 dst = os.path.splitext(args.source)[0] + ".kml"
 
 with open(src) as file:
-	data = file.read().splitlines() #remove new line separator
-
-data = ''.join(data) #modify list data to str data
-
+	data = file.read()
 
 split = data.split(';')
 name = split.pop(0)
