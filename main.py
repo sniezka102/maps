@@ -11,22 +11,24 @@ src = args.source
 dst = os.path.splitext(args.source)[0] + ".kml"
 
 with open(src) as file:
-	data = file.read()
-
-#check the file configuration, now ';' is not used, points are splited by new line separator
-
-split = data.split(';')
-name = split.pop(0)
+	data = []
+	for line in file:
+		data.append(line.rstrip())
 
 coords = ''
 
-for item in split:
+for item in data:
 	itemsplit = item.split(',')
+	name = itemsplit[0]
+	latitude = itemsplit[1]
+	longitude = itemsplit[2]
+
 	if len(itemsplit) == 3:
-		coords = coords + itemsplit[2] + "," + itemsplit[1] + ",0,"
+		coords = coords + longitude + "," + latitude + ",0,"
 
 coords = coords[:-1]
 
 with open(dst, "w") as file:
 	file.write(BODY_FMT.format(name,coords))
 
+print("File saved")
