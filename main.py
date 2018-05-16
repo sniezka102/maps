@@ -16,6 +16,8 @@ with open(src) as file:
 data = ''.join(data) #modify list data to str data
 
 
+#check the file configuration, now ';' is not used, points are splited by new line separator
+
 split = data.split(';')
 name = split.pop(0)
 
