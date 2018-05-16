@@ -22,9 +22,7 @@ for item in data:
 	name = itemsplit[0]
 	latitude = itemsplit[1]
 	longitude = itemsplit[2]
-
-	if len(itemsplit) == 3:
-		coords = coords + longitude + "," + latitude + ",0,"
+	coords = coords + longitude + "," + latitude + ",0,"
 
 coords = coords[:-1]
 
